@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {Message, MessageBox} from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {getToken} from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -17,7 +17,7 @@ service.interceptors.request.use(
 
     if (store.getters.token) {
       // let each request carry token
-      // ['X-Token'] is a custom headers key
+      // ['X-Token'] is a Custom headers key
       // please modify it according to the actual situation
       config.headers['X-Token'] = getToken()
     }
@@ -35,7 +35,7 @@ service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code
@@ -45,8 +45,8 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    // if the Custom code is not 200, it is judged as an error.
+    if (res.code !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -54,7 +54,7 @@ service.interceptors.response.use(
       })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+      if (res.code === 500 || res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
           confirmButtonText: 'Re-Login',

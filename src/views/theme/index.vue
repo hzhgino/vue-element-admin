@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { toggleClass } from '@/utils'
+import {toggleClass} from '@/utils'
 import '@/assets/custom-theme/index.css' // the theme changed version element-ui css
 
 export default {
@@ -94,7 +94,7 @@ export default {
   },
   watch: {
     theme() {
-      toggleClass(document.body, 'custom-theme')
+      toggleClass(document.body, 'Custom-theme')
     }
   }
 }

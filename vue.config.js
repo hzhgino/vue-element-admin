@@ -36,6 +36,18 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    // before: require('./mock/mock-server.js')
+    proxy: {
+      [process.env.VUE_APP_BASE_API]: {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        logLevel: 'debug',
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      }
+    },
+    // after or before 都可以
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {
